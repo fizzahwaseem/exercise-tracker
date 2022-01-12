@@ -10,13 +10,20 @@ router.route('/').get((req,res) => {
 
 router.route('/add').post((req,res) => {
     const username = req.body.username;
+    const description = req.body.description;
+    const duration = Number(req.body.duration);
+    const date = Date.parse(req.body.date)
 
-    const mewUser = new User({username});
+    const mewExercise = new Exercise({
+        username,
+        description,
+        duration,
+        date,
+    });
 
-    newUser.save()
-    .then(() => res.join('User added!'))
-    .catch(err => res.status(400).json('Error: ' +err));
-
+    newExercise.save()
+    .then(() => res.json('Exercise  added!'))
+    .catch(err => res.status(400).json('Error: '+err));
 });
 
-module.export = router;
+module.exports = router;
